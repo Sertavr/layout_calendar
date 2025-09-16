@@ -1,30 +1,3 @@
-@use 'sass:list';
-
-$cell-size: 100px;
-$column-count: 7;
-$single-gap: 1px;
-$gap-width: ($column-count - 1) * $single-gap;
-$days-of-week: mon, tue, wed, thu, fri, sut, sun;
-$possible-count-days: 28, 29, 30, 31;
-$max-number-days: 31;
-
-@function retreat($cell, $single, $ind) {
-  @return ($ind - 1) * $cell + ($ind - 1) * $single-gap;
-}
-
-body {
-  margin: 0;
-}
-
-.main {
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-}
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -35,28 +8,28 @@ body {
     box-sizing: border-box;
     width: $cell-size;
     height: $cell-size;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+    @include flexible-container;
+
     background-color: #eee;
     border: 1px solid #000;
-    transition: all 0.5s;
     cursor: pointer;
 
+    @include hovering-duration;
+
     @for $num from 1 through $max-number-days {
-      &--#{$num} {
-        &::before {
-          content: attr(data-day);
-          font-family: Arial, Helvetica, sans-serif;
-          font-size: 30px;
-        }
+      &:nth-child(#{$num})::before {
+        content: '#{$num}';
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
       }
     }
 
     &:hover {
       background-color: #ffbfcb;
       transform: translateY(-20px);
-      transition: all 0.5s;
+
+      @include hovering-duration;
     }
   }
 
