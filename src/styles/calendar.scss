@@ -1,8 +1,10 @@
 .calendar {
+  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
   gap: $single-gap;
-  width: ($column-count * $cell-size) + $gap-width;
+  padding: $padding-size;
+  width: ($column-count * $cell-size) + $gap-width + ($padding-size * 2);
 
   &__day {
     box-sizing: border-box;
@@ -12,7 +14,7 @@
     @include flexible-container;
 
     background-color: #eee;
-    border: 1px solid #000;
+    border: $border-width solid #000;
     cursor: pointer;
 
     @include hovering-duration;
@@ -29,7 +31,7 @@
       background-color: #ffbfcb;
       transform: translateY(-20px);
 
-      @include hovering-duration;
+      // @include hovering-duration;
     }
   }
 
